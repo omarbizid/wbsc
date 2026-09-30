@@ -1,0 +1,22 @@
+# Ground-truth skills for the TUNE set (eval/sample_tune.jsonl). See LABELLING_GUIDE.md.
+# Labelled 2026-09-25 by the AI assistant from the full descriptions; not yet human-reviewed.
+tune-01: [Python, SQL, Spark, Databricks]   # "Snowflake, AWS" appear only as former employers
+tune-02: []
+tune-03: [SQL, Python, pandas, scikit-learn, R, PyTorch, Spark]
+tune-04: [PyTorch, Spark]
+tune-05: [SQL, dbt, Snowflake, BigQuery, Databricks, Airflow, Python]
+tune-06: []
+tune-07: [SQL, Python, R, Looker, Tableau]
+tune-08: [SQL, Python]
+tune-09: [Java, Scala, Python]
+tune-10: []
+tune-11: [SQL, Python]
+tune-12: [Looker, Python, SQL]
+tune-13: [Python, SQL]
+tune-14: [Python, Scala, JavaScript, AWS, Azure, GCP, Spark, Databricks]
+tune-15: []
+tune-16: [Python, SQL]
+tune-17: [Excel]
+tune-18: [BigQuery, SQL, Python, Airflow, dbt]
+tune-19: [Tableau, SQL, Python, Excel]
+tune-20: [SQL, Python]

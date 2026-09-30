@@ -1,0 +1,13 @@
+# Never bake secrets or collected data into the image.
+.env
+.git
+.venv
+venv
+data
+logs
+dbt/target
+dbt/logs
+**/__pycache__
+**/*.egg-info
+.pytest_cache
+.ruff_cache

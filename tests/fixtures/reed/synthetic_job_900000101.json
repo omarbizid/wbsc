@@ -1,0 +1,12 @@
+{
+  "_note": "SYNTHETIC fixture shaped like Reed's documented job-details response. Not real data.",
+  "employerId": 1, "employerName": "synthetic_ Northwind Analytics Ltd",
+  "jobId": 900000101, "jobTitle": "Graduate Data Analyst", "locationName": "Leeds",
+  "minimumSalary": 27000.0, "maximumSalary": 30000.0,
+  "yearlyMinimumSalary": 27000.0, "yearlyMaximumSalary": 30000.0,
+  "currency": "GBP", "salaryType": "per annum", "salary": "£27,000 - £30,000 per annum",
+  "datePosted": "20/09/2026", "expirationDate": "31/10/2026",
+  "externalUrl": null, "jobUrl": "https://example.test/reed/900000101",
+  "partTime": false, "fullTime": true, "contractType": "Permanent",
+  "jobDescription": "<p>SYNTHETIC TEST RECORD. Join our graduate scheme as a Data Analyst.</p><ul><li>Write SQL queries against PostgreSQL</li><li>Build dashboards in Power BI</li><li>Use Python (pandas) for analysis</li></ul><p>Hybrid working: 2 days a week in the office in Leeds.</p>"
+}

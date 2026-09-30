@@ -1,0 +1,25 @@
+{
+  "_note": "SYNTHETIC fixture shaped like Reed's documented search response. Not real data. Replace with a saved real response once an API key is available.",
+  "results": [
+    {"jobId": 900000101, "employerId": 1, "employerName": "synthetic_ Northwind Analytics Ltd",
+     "jobTitle": "Graduate Data Analyst", "locationName": "Leeds",
+     "minimumSalary": 27000.0, "maximumSalary": 30000.0, "currency": "GBP",
+     "expirationDate": "31/10/2026", "date": "20/09/2026",
+     "jobDescription": "Truncated description in search results...",
+     "applications": 12, "jobUrl": "https://example.test/reed/900000101"},
+    {"jobId": 900000102, "employerId": 2, "employerName": "synthetic_ Contoso Care",
+     "jobTitle": "Care Assistant", "locationName": "Leeds",
+     "minimumSalary": 12.5, "maximumSalary": 13.0, "currency": "GBP",
+     "expirationDate": "31/10/2026", "date": "21/09/2026",
+     "jobDescription": "Not a data role.", "applications": 3,
+     "jobUrl": "https://example.test/reed/900000102"},
+    {"jobId": 900000103, "employerId": 3, "employerName": "synthetic_ Fabrikam",
+     "jobTitle": "Junior Data Engineer", "locationName": "Manchester",
+     "minimumSalary": null, "maximumSalary": null, "currency": null,
+     "expirationDate": "31/10/2026", "date": "22/09/2026",
+     "jobDescription": "Truncated...", "applications": 5,
+     "jobUrl": "https://example.test/reed/900000103"}
+  ],
+  "ambiguousLocations": [],
+  "totalResults": 3
+}

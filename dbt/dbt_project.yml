@@ -1,0 +1,31 @@
+name: jobintel
+version: "1.0.0"
+profile: jobintel
+config-version: 2
+
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+target-path: "target"
+clean-targets: ["target", "dbt_packages"]
+
+vars:
+  # Postings not observed in this many consecutive *successful* collections of their
+  # scope are inactive. Failed collections never count as "not observed".
+  inactive_after_missed_batches: 2
+  # A source is stale when its last successful batch is older than this.
+  stale_after_hours: 36
+  # Synthetic (test/demo) batches are excluded from marts unless this is true.
+  include_synthetic: false
+
+models:
+  jobintel:
+    staging:
+      +schema: staging
+      +materialized: view
+    intermediate:
+      +schema: intermediate
+      +materialized: view
+    marts:
+      +schema: marts
+      +materialized: table

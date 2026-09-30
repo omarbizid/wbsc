@@ -1,0 +1,222 @@
+{
+ "set": "eval",
+ "extractor_version": "skills-1",
+ "n_postings": 50,
+ "tp": 178,
+ "fp": 1,
+ "fn": 1,
+ "precision": 0.9944,
+ "recall": 0.9944,
+ "f1": 0.9944,
+ "per_skill": {
+  "AWS": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Airflow": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Azure": {
+   "tp": 5,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "BigQuery": {
+   "tp": 9,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Databricks": {
+   "tp": 7,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Docker": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Excel": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 1,
+   "precision": 1.0,
+   "recall": 0.75
+  },
+  "GCP": {
+   "tp": 8,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Git": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Java": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Kafka": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Kubernetes": {
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Looker": {
+   "tp": 10,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "PostgreSQL": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Power BI": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "PyTorch": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Python": {
+   "tp": 29,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "R": {
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Redshift": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "SAS": {
+   "tp": 0,
+   "fp": 1,
+   "fn": 0,
+   "precision": 0.0,
+   "recall": null
+  },
+  "SQL": {
+   "tp": 30,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Snowflake": {
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Spark": {
+   "tp": 10,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Tableau": {
+   "tp": 9,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "TensorFlow": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Terraform": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "dbt": {
+   "tp": 11,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "pandas": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  }
+ },
+ "errors": [
+  {
+   "id": "eval-08",
+   "type": "FN",
+   "skill": "Excel"
+  },
+  {
+   "id": "eval-39",
+   "type": "FP",
+   "skill": "SAS",
+   "evidence": "t, we are seeking sales experience in e-commerce, SAS, and other digital platforms along with demonstra"
+  }
+ ]
+}

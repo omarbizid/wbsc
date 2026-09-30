@@ -1,0 +1,12 @@
+{
+  "_note": "SYNTHETIC fixture shaped like Reed's documented job-details response. Not real data. No salary advertised.",
+  "employerId": 3, "employerName": "synthetic_ Fabrikam",
+  "jobId": 900000103, "jobTitle": "Junior Data Engineer", "locationName": "Manchester",
+  "minimumSalary": null, "maximumSalary": null,
+  "yearlyMinimumSalary": null, "yearlyMaximumSalary": null,
+  "currency": null, "salaryType": null, "salary": "Competitive",
+  "datePosted": "22/09/2026", "expirationDate": "31/10/2026",
+  "externalUrl": null, "jobUrl": "https://example.test/reed/900000103",
+  "partTime": false, "fullTime": true, "contractType": "Permanent",
+  "jobDescription": "<p>SYNTHETIC TEST RECORD. Build ETL pipelines with Python, Airflow and dbt on Snowflake. Salary competitive. We will train you on Spark and cloud tooling.</p>"
+}

@@ -1,0 +1,94 @@
+# Skill taxonomy: the defined list of technical skills we extract and evaluate.
+#
+# Each skill has:
+#   name      canonical name shown in reports
+#   category  grouping for the dashboard
+#   patterns  regexes; any match counts. Aliases map to the canonical name
+#             (e.g. "Postgres" → PostgreSQL). Written against plain text.
+#   case_sensitive  default false. True for names that are also ordinary words
+#             ("Excel", "Spark", "Git"), where lowercase is usually not the tool.
+#   context   optional: at least one of these regexes must also match within
+#             `context_window` characters of the hit (used for "R").
+#   relaxed_case_context  optional, for case-sensitive skills: a match in another
+#             casing (e.g. "spark") is accepted only if one of these regexes matches
+#             within `context_window` characters.
+#
+# Every pattern is wrapped in token boundaries by the extractor: the character before
+# and after a match must not be a letter, digit, "+", "#" or "_". That is why
+# "Java" never matches inside "JavaScript" and "SQL" never matches inside "NoSQL".
+#
+# Changing this file changes extraction output: bump `version`.
+version: skills-1
+
+skills:
+  # --- languages
+  - {name: SQL, category: language, patterns: ['SQL', 'SparkSQL'], case_sensitive: true}
+  - {name: Python, category: language, patterns: ['python']}
+  - name: R
+    category: language
+    patterns: ['R']
+    case_sensitive: true
+    context_window: 40
+    context:
+      - '\b(?:python|sql|sas|spss|stata|scala|julia|matlab)\b'
+      - '\bprogramming\b|\blanguages?\b|\bstatistical\b|\bcoding\b|\bscripting\b'
+      - '\btidyverse\b|\bshiny\b|\bggplot|\bdplyr\b|\bcaret\b|\brstudio\b|\bcran\b'
+  - {name: Scala, category: language, patterns: ['scala']}
+  - {name: Java, category: language, patterns: ['java(?!\s*script)']}
+  - {name: JavaScript, category: language, patterns: ['javascript', 'java script']}
+  - {name: VBA, category: language, patterns: ['VBA'], case_sensitive: true}
+  - {name: SAS, category: language, patterns: ['SAS'], case_sensitive: true}
+
+  # --- databases and warehouses
+  - {name: PostgreSQL, category: database, patterns: ['postgres(?:ql)?', 'psql']}
+  - {name: MySQL, category: database, patterns: ['mysql']}
+  - {name: SQL Server, category: database,
+     patterns: ['sql\s*server', 'mssql', 't-sql', 'tsql', 'ssis', 'ssrs']}
+  - {name: MongoDB, category: database, patterns: ['mongo(?:db)?']}
+  - {name: Snowflake, category: warehouse, patterns: ['snowflake(?!\s+schema)']}
+  - {name: BigQuery, category: warehouse, patterns: ['big\s?query']}
+  - {name: Redshift, category: warehouse, patterns: ['redshift']}
+  - {name: Databricks, category: warehouse, patterns: ['databricks']}
+
+  # --- BI and spreadsheets
+  - {name: Excel, category: bi, patterns: ['Excel(?!\s+(?:in|at)\b)', 'EXCEL'],
+     case_sensitive: true}
+  - {name: Power BI, category: bi, patterns: ['power\s?bi']}
+  - {name: Tableau, category: bi, patterns: ['tableau']}
+  - {name: Looker, category: bi, patterns: ['looker(?:\s+studio)?']}
+  - {name: Qlik, category: bi, patterns: ['qlik(?:\s?(?:view|sense))?']}
+
+  # --- transformation, orchestration, big data
+  - {name: dbt, category: transformation, patterns: ['dbt'], case_sensitive: false}
+  - {name: Airflow, category: orchestration, patterns: ['airflow']}
+  # "SparkTM": the ™ in "Apache Spark™" becomes "TM" after Unicode normalisation (tune set)
+  - {name: Spark, category: big_data,
+     patterns: ['Spark', 'SparkTM', 'SparkSQL', 'PySpark', 'pyspark', '(?i:spark\s?sql)'],
+     case_sensitive: true,
+     # lowercase "spark" only next to other big-data tools ("e.g. spark, hadoop", tune set)
+     relaxed_case_context: ['\b(?:hadoop|flink|beam|kafka|hive|databricks|map-?reduce|distributed)\b']}
+  - {name: Kafka, category: big_data, patterns: ['kafka']}
+
+  # --- cloud
+  - {name: AWS, category: cloud, patterns: ['AWS', 'amazon\s+web\s+services'],
+     case_sensitive: false}
+  - {name: Azure, category: cloud, patterns: ['azure']}
+  - {name: GCP, category: cloud, patterns: ['GCP', 'google\s+cloud(?:\s+platform)?'],
+     case_sensitive: false}
+
+  # --- engineering tooling
+  - {name: Git, category: tooling, patterns: ['Git', 'GitHub', 'git'],
+     case_sensitive: true}
+  - {name: Docker, category: tooling, patterns: ['docker']}
+  - {name: Kubernetes, category: tooling, patterns: ['kubernetes', 'k8s']}
+  - {name: Terraform, category: tooling, patterns: ['terraform']}
+
+  # --- Python data / ML libraries
+  - {name: pandas, category: library, patterns: ['pandas']}
+  - {name: NumPy, category: library, patterns: ['numpy']}
+  - {name: scikit-learn, category: library, patterns: ['scikit[- ]learn', 'sklearn']}
+  - {name: TensorFlow, category: library, patterns: ['tensorflow']}
+  - {name: PyTorch, category: library, patterns: ['pytorch']}
+
+  # --- statistics packages
+  - {name: SPSS, category: statistics, patterns: ['SPSS'], case_sensitive: true}

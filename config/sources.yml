@@ -1,0 +1,58 @@
+# Scopes collected for each source. Every source here must be documented in
+# docs/source_register.md before it is enabled.
+
+greenhouse:
+  # Public Greenhouse job boards of companies with UK offices that advertise data roles.
+  # Chosen on 2026-09-22 by probing boards for UK data-family titles.
+  boards:
+    - {token: monzo, company: Monzo}
+    - {token: deliveroo, company: Deliveroo}
+    - {token: wayve, company: Wayve}
+    - {token: intercom, company: Intercom}
+    - {token: tripadvisor, company: Tripadvisor}
+    - {token: databricks, company: Databricks}
+    - {token: dojo, company: Dojo}
+    - {token: autotrader, company: Auto Trader}
+    - {token: thehutgroup, company: THG}
+    - {token: gymshark, company: Gymshark}
+    - {token: sumup, company: SumUp}
+    - {token: kaluza, company: Kaluza}
+    - {token: ocadogroup, company: Ocado Group}
+    - {token: gocardless, company: GoCardless}
+    - {token: affirm, company: Affirm}
+    - {token: stripe, company: Stripe}
+    - {token: coinbase, company: Coinbase}
+    - {token: gitlab, company: GitLab}
+    - {token: hellofresh, company: HelloFresh}
+    - {token: adyen, company: Adyen}
+    - {token: thoughtworks, company: Thoughtworks}
+    - {token: tide, company: Tide}
+    - {token: ebury, company: Ebury}
+
+lever:
+  # Lever-hosted career pages (HTML). robots.txt: Allow /, Crawl-delay 1.
+  # Probed on 2026-09-25 for UK data-family titles (count in brackets).
+  companies:
+    - {slug: octoenergy, company: Octopus Energy}   # (7)
+    - {slug: spotify, company: Spotify}             # (5)
+    - {slug: zopa, company: Zopa}                   # (4)
+    - {slug: matillion, company: Matillion}         # (0) data company, Manchester office
+    - {slug: palantir, company: Palantir}           # (0) London office
+
+reed:
+  # Official Reed Jobseeker API. Needs REED_API_KEY in .env; skipped otherwise.
+  # Reed matches keywords anywhere in the advert, so broad queries ("data analyst": ~1,900
+  # results, "data engineer": ~2,700 on 2026-09-25) cannot be read completely every day.
+  # We use entry-level-focused queries that fit in max_pages_per_query, so each scope is
+  # complete and the inactive rule can apply. Only target-role titles get a detail request.
+  location: United Kingdom
+  max_requests: 1200           # hard cap per daily run (search pages + detail pages)
+  max_pages_per_query: 10      # 100 results per page
+  queries:
+    - {keywords: data analyst, graduate: true}     # Reed's "suitable for graduates" flag
+    - {keywords: data engineer, graduate: true}
+    - graduate data analyst
+    - graduate data engineer
+    - junior data analyst
+    - junior data engineer
+    - analytics engineer

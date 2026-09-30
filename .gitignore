@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+# raw collected data is preserved locally, not committed
+data/raw/*
+!data/raw/.gitkeep
+data/demo_raw/
+dbt/target/
+dbt/logs/
+logs/
+dbt/.user.yml
+.streamlit/secrets.toml

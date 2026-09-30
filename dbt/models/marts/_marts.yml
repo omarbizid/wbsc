@@ -1,0 +1,117 @@
+version: 2
+
+models:
+  - name: dim_postings
+    description: >
+      One row per posting per source, with the content of its latest observed version,
+      its derived role/seniority, active status and duplicate cluster.
+      Count unique jobs with `is_canonical`.
+    columns:
+      - name: posting_id
+        tests: [unique, not_null]
+      - name: url
+        tests: [not_null]
+      - name: source_id
+        tests:
+          - not_null
+          - accepted_values: {arguments: {values: ['greenhouse', 'lever', 'reed']}}
+      - name: working_arrangement
+        tests:
+          - not_null
+          - accepted_values: {arguments: {values: ['remote', 'hybrid', 'on-site', 'unknown']}}
+      - name: role_category
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['data_analyst', 'data_engineer', 'analytics_engineer',
+                         'data_scientist', 'other', 'unknown']
+      - name: seniority
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['intern', 'entry', 'mid', 'senior', 'lead', 'manager', 'unknown']
+      - name: salary_period
+        tests:
+          - accepted_values:
+              arguments: {values: ['year', 'month', 'week', 'day', 'hour']}
+      - name: is_active
+        tests: [not_null]
+      - name: cluster_id
+        tests: [not_null]
+
+  - name: fct_posting_skills
+    columns:
+      - name: posting_id
+        tests:
+          - not_null
+          - relationships: {arguments: {to: ref('dim_postings'), field: posting_id}}
+      - name: skill
+        tests: [not_null]
+    tests:
+      - dbt_utils_free_unique_combination:
+          arguments: {columns: [posting_id, skill]}
+
+  - name: fct_posting_weeks
+    columns:
+      - name: posting_id
+        tests:
+          - relationships: {arguments: {to: ref('dim_postings'), field: posting_id}}
+
+  - name: mart_source_health
+    columns:
+      - name: source_id
+        tests: [unique, not_null]
+
+unit_tests:
+  - name: duplicate_clusters_and_canonical_choice
+    description: >
+      Same company + title + city across two sources is one cluster, with the company
+      career source canonical. A different city is a different job. Within one source,
+      an identical description is a re-post (merged); different descriptions under the
+      same title are separate openings (not merged).
+    model: int_posting_clusters
+    given:
+      - input: ref('int_posting_match_keys')
+        rows:
+          - {posting_id: 1, source_id: reed, first_seen_at: '2026-09-01', company_key: acme, title_key: data analyst, primary_city: London, description_hash: r1}
+          - {posting_id: 2, source_id: greenhouse, first_seen_at: '2026-09-03', company_key: acme, title_key: data analyst, primary_city: London, description_hash: g1}
+          - {posting_id: 3, source_id: greenhouse, first_seen_at: '2026-09-01', company_key: acme, title_key: data analyst, primary_city: Leeds, description_hash: g2}
+          - {posting_id: 4, source_id: greenhouse, first_seen_at: '2026-09-01', company_key: beta, title_key: data engineer, primary_city: Leeds, description_hash: x}
+          - {posting_id: 5, source_id: greenhouse, first_seen_at: '2026-09-02', company_key: beta, title_key: data engineer, primary_city: Leeds, description_hash: x}
+          - {posting_id: 6, source_id: greenhouse, first_seen_at: '2026-09-01', company_key: gamma, title_key: bi analyst, primary_city: York, description_hash: p}
+          - {posting_id: 7, source_id: greenhouse, first_seen_at: '2026-09-01', company_key: gamma, title_key: bi analyst, primary_city: York, description_hash: q}
+    expect:
+      rows:
+        - {posting_id: 1, cluster_id: 1, cluster_size: 2, is_canonical: false}
+        - {posting_id: 2, cluster_id: 1, cluster_size: 2, is_canonical: true}
+        - {posting_id: 3, cluster_id: 3, cluster_size: 1, is_canonical: true}
+        - {posting_id: 4, cluster_id: 4, cluster_size: 2, is_canonical: true}
+        - {posting_id: 5, cluster_id: 4, cluster_size: 2, is_canonical: false}
+        - {posting_id: 6, cluster_id: 6, cluster_size: 1, is_canonical: true}
+        - {posting_id: 7, cluster_id: 7, cluster_size: 1, is_canonical: true}
+
+  - name: inactive_only_after_two_successful_misses
+    description: >
+      Missed successful batches count; failed batches never do. A scope that is no longer
+      collected at all (retired) makes its postings not active, flagged scope_retired.
+    model: int_posting_activity
+    given:
+      - input: ref('int_posting_last_seen')
+        rows:
+          - {posting_id: 1, source_id: greenhouse, scope_key: acme, last_seen_at: '2026-09-01 08:00', last_seen_batch_started_at: '2026-09-01 07:00'}
+          - {posting_id: 2, source_id: greenhouse, scope_key: beta, last_seen_at: '2026-09-01 08:00', last_seen_batch_started_at: '2026-09-01 07:00'}
+          - {posting_id: 3, source_id: greenhouse, scope_key: gone, last_seen_at: '2026-09-01 08:00', last_seen_batch_started_at: '2026-09-01 07:00'}
+      - input: ref('stg_batch_scopes')
+        rows:
+          # acme: two successful batches without posting 1 -> inactive
+          - {source_id: greenhouse, scope_key: acme, scope_status: success, batch_started_at: '2026-09-02 07:00'}
+          - {source_id: greenhouse, scope_key: acme, scope_status: success, batch_started_at: '2026-09-03 07:00'}
+          # beta: one failure and one success -> still active
+          - {source_id: greenhouse, scope_key: beta, scope_status: failed, batch_started_at: '2026-09-02 07:00'}
+          - {source_id: greenhouse, scope_key: beta, scope_status: success, batch_started_at: '2026-09-03 07:00'}
+    expect:
+      rows:
+        - {posting_id: 1, n_successful_batches_missed: 2, scope_retired: false, is_active: false}
+        - {posting_id: 2, n_successful_batches_missed: 1, scope_retired: false, is_active: true}
+        # scope "gone" was removed from the config: not in either later batch
+        - {posting_id: 3, n_successful_batches_missed: 0, scope_retired: true, is_active: false}

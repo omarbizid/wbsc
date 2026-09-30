@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: core
+    schema: core
+    description: Normalised postings written by the Python loader.
+    tables:
+      - name: posting
+      - name: posting_version
+      - name: posting_observation
+      - name: version_skill
+      - name: version_classification
+  - name: ops
+    schema: ops
+    description: Collection and processing metadata written by the Python pipeline.
+    tables:
+      - name: source
+      - name: collection_batch
+      - name: batch_scope
+      - name: load_run
+      - name: quarantine

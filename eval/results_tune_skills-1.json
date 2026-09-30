@@ -1,0 +1,161 @@
+{
+ "set": "tune",
+ "extractor_version": "skills-1",
+ "n_postings": 20,
+ "tp": 59,
+ "fp": 0,
+ "fn": 0,
+ "precision": 1.0,
+ "recall": 1.0,
+ "f1": 1.0,
+ "per_skill": {
+  "AWS": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Airflow": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Azure": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "BigQuery": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Databricks": {
+   "tp": 3,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Excel": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "GCP": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Java": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "JavaScript": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Looker": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "PyTorch": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Python": {
+   "tp": 14,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "R": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "SQL": {
+   "tp": 12,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Scala": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Snowflake": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Spark": {
+   "tp": 4,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "Tableau": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "dbt": {
+   "tp": 2,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "pandas": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  },
+  "scikit-learn": {
+   "tp": 1,
+   "fp": 0,
+   "fn": 0,
+   "precision": 1.0,
+   "recall": 1.0
+  }
+ },
+ "errors": []
+}

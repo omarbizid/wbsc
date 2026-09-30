@@ -1,0 +1,10 @@
+# Streamlit settings for dashboard/app.py (read from the project root).
+[browser]
+gatherUsageStats = false
+
+[server]
+headless = false
+runOnSave = false
+
+[client]
+toolbarMode = "viewer"
